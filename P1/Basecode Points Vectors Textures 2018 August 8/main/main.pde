@@ -22,6 +22,7 @@ int pictureCounterPDF=0, pictureCounterJPG=0, pictureCounterTIF=0; // appended t
 
 // PICTURES
 PImage myFace; // picture of student's face as /data/myFace.jpg in sketch folder !!!!!!!!
+PImage partnerFace;
 
 // TEXT
 PFont bigFont; // Font used for labels and help text
@@ -63,6 +64,8 @@ void setup()               // executed once at the begining LatticeImage
   smooth();                  // turn on antialiasing
   bigFont = createFont("AdobeFanHeitiStd-Bold-32", 16); textFont(bigFont); // font used to write on screen
   myFace = loadImage("data/studentFace.jpg");  // file containing photo of student's face
+  partnerFace = loadImage("data/partnerFace.jpg");  // file containing photo of student's face
+  
   declarePoints(Point); // creates objects for 
   readPoints("data/points.pts");
   A=Point[0]; B=Point[1]; C=Point[2]; D=Point[3]; // sets the A B C D pointers
@@ -199,8 +202,10 @@ void draw()      // executed at each frame (30 times per second)
        PNT At=P(), Bt=P(), Ct=P(), Dt=P();
        morphQuads(At,Bt,Ct,Dt,Point,time);
        noFill(); noStroke(); 
-       if(texturing) 
+       if(texturing) {
          drawQuadTextured(At,Bt,Ct,Dt,myFace); // see ``points'' TAB for implementation
+         drawQuadTextured(At,Bt,Ct,Dt,partnerFace);
+       }
        else
          {
          noFill(); 

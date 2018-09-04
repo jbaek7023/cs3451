@@ -32,10 +32,44 @@ void drawNevilleCurve(float a, PNT A, float b, PNT B, float c, PNT C, float d, P
 void showNevilleConstruction(float a, PNT A, float b, PNT B, float c, PNT C, float d, PNT D, float time) 
   {
   //**UG** ADD HERE YOUR SHOW NEVILLE CONSTRUCTION CODE,
-     noFill();
+  PNT Pab = Neville(a,A,b,B,time);
+  PNT Pbc = Neville(b,B,c,C,time);
+  PNT Pcd = Neville(c,C,d,D,time);
+  PNT Pabc = Neville(a,A,b,B,c,C,time);
+  PNT Pbcd = Neville(b,B,c,C,d,D,time); 
+  PNT Pabcd = Neville(a, A, b, B, c, C, d, D, time);
+  
+  noFill();
+  strokeWeight(14);
+  stroke(orange,40); drawNevilleCurve(a, A, b, B, c, C, d, D);   
 
-    strokeWeight(14);
-    stroke(orange,40); drawNevilleCurve(a, A, b, B, c, C, d, D);   
+  noStroke();
+  fill(red,100); drawCircle(Pab,16); 
+  fill(green,100); drawCircle(Pbc,16);
+  fill(blue,100); drawCircle(Pcd,16);
+  fill(brown,100); drawCircle(Pabc,16);
+  fill(magenta,100); drawCircle(Pbcd,16);
+  fill(black,100); drawCircle(Pabcd,16);
+
+  //  noFill();
+ 
+  //stroke(blue);
+  //strokeWeight(2);  drawEdge(A,B); drawEdge(B,C); drawEdge(C,D);
+  //strokeWeight(6);  drawEdge(A,Pab);  drawEdge(B,Pbc); drawEdge(C,Pcd);
+
+  ////stroke(green);    
+  //strokeWeight(2);  drawEdge(Pab,Pbc); drawEdge(Pbc,Pcd); 
+  //strokeWeight(6); drawEdge(Pab,Pabc);  drawEdge(Pbc,Pbcd); 
+
+  //stroke(red);
+  //strokeWeight(2);  drawEdge(Pabc,Pbcd); 
+  //strokeWeight(6);  drawEdge(Pabc,Pabcd);  
+
+  //noStroke();
+  //float r=8;
+  ////fill(blue); drawCircle(Pab,r); drawCircle(Pbc,r); drawCircle(Pcd,r);
+  ////fill(green); drawCircle(Pabc,r); drawCircle(Pbcd,r); 
+  ////fill(red); drawCircle(Pabcd,r);
   }
 
 //**** BEZIER INTERPOLATING CURVES AND ANIMATIONS 

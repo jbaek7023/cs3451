@@ -1,8 +1,12 @@
 void showHelpScreen()
     {
     background(yellow); // paints background in yellow
-    image(myFace, width-myFace.width/2,25,myFace.width/2,myFace.height/2); // displays picture of student
-    // image(myFace, width-myFace.width*1.,25,myFace.width/2,myFace.height/2); // displays picture of other student in team
+    image(partnerFace, width-150,150.*myFace.height/myFace.width,150,150.*myFace.height/partnerFace.width); 
+    image(myFace, width-150,0,150,150.*myFace.height/myFace.width);
+    
+    fill(0);
+    text("Me",600, 100);
+    text("Partner",580,280);
     textAlign(LEFT, TOP);
     fill(black); // color for writing on screen (notice : writing text uses fill not stroke to define the color)
     int L=0; // line counter, incremented below for ech line
