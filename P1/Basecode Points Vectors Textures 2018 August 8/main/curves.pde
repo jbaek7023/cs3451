@@ -1,23 +1,24 @@
 //**** NEVILLE INTERPOLATING CURVES AND ANIMATIONS *** Project 1 for CS3451
 PNT Neville(float a, PNT A, float b, PNT B, float t) {
   //**UG** ADD YOUR CODE HERE INSTEAD OF LINE BELOW
-  return new PNT(A.x + t*(B.x-A.x), A.y + t*(B.y-A.y)); // Q: do we need to use a and b?
-  //return LERP(A,t,B);  // INCORRET SOLUTION PROVIDED AS PLACEHOLDER
+  //return new PNT(A.x + t*(B.x-A.x), A.y + t*(B.y-A.y)); // Q: do we need to use a and b?
+  return LERP(A, (t-a)/(b-a), B);
 }
   
-PNT Neville(float a, PNT A, float b, PNT B, float c, PNT C, float t) 
-  {
+PNT Neville(float a, PNT A, float b, PNT B, float c, PNT C, float t) {
     //**UG** ADD YOUR CODE HERE INSTEAD OF LINE BELOW
-    
-  return  Neville(a,A,c,C,t);  // INCORRET SOLUTION PROVIDED AS PLACEHOLDER
+    PNT pab = Neville(a, A, b, B, t);
+    PNT pbc = Neville(b, B, c, C, t);
+
+  return Neville(a, pab, c, pbc, t); 
   }
   
-PNT Neville(float a, PNT A, float b, PNT B, float c, PNT C, float d, PNT D, float t) 
-  {
+PNT Neville(float a, PNT A, float b, PNT B, float c, PNT C, float d, PNT D, float t) {
   //**UG** ADD YOUR CODE HERE INSTEAD OF LINE BELOW
-  
-  return Neville(a,A,d,D,t);  // INCORRET SOLUTION PROVIDED AS PLACEHOLDER
-  }
+  PNT pabc = Neville(a, A, b, B, c, C, t);
+  PNT pbcd = Neville(b, B, c, C, d, D, t);
+  return Neville(a, pabc, d, pbcd, t);  
+}
 
 void drawNevilleCurve(float a, PNT A, float b, PNT B, float c, PNT C, float d, PNT D)
     {
@@ -31,7 +32,10 @@ void drawNevilleCurve(float a, PNT A, float b, PNT B, float c, PNT C, float d, P
 void showNevilleConstruction(float a, PNT A, float b, PNT B, float c, PNT C, float d, PNT D, float time) 
   {
   //**UG** ADD HERE YOUR SHOW NEVILLE CONSTRUCTION CODE,
-  
+     noFill();
+
+    strokeWeight(14);
+    stroke(orange,40); drawNevilleCurve(a, A, b, B, c, C, d, D);   
   }
 
 //**** BEZIER INTERPOLATING CURVES AND ANIMATIONS 
