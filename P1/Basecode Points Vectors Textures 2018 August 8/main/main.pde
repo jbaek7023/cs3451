@@ -107,6 +107,7 @@ void draw()      // executed at each frame (30 times per second)
           {
             
           // Set time values (knots) associated with the control points 
+          color lineColor = blue;
           float a=0, b=0.33, c=0.67, d=1; // uniform setting of knots
           textAlign(LEFT, TOP); // writeLine assumes text position is not centered
           if(method==0) // use uniform spacing for  knots (intermediate times) at B and C
@@ -116,11 +117,26 @@ void draw()      // executed at each frame (30 times per second)
           if(method==1) // use distance-based spacing for  knots (intermediate times) at B and C
             {
             //**UG** ADD YOUR CODE HERE TO COMPUTE CHORDAL KNOTS
+            // RED
+            // GREEN (Centripetal)
+            float l = (dist(B, A)) + (dist(C, B)) + (dist(D, C));
+            a = 0;
+            b = (dist(B, A)) / l;
+            c = (dist(C, B)) / l + b;
+            d = 1;
+            lineColor = red;
             writeLine("Chordal knot spacing",0); // write this at top of screen (0)
             }
           if(method==2) // use square-root spacing for knots (intermediate times) at B and C
             {
             //**UG** ADD YOUR CODE HERE TO COMPUTE CENTRIPETAL KNOTS
+            // GREEN (Centripetal)
+            float l = sqrt(dist(B, A)) + sqrt(dist(C, B)) + sqrt(dist(D, C));
+            a = 0;
+            b = sqrt(dist(B, A)) / l;
+            c = sqrt(dist(C, B)) / l + b;
+            d = 1;
+            lineColor = green;
             writeLine("Centripetal knot spacing",0); // write this at top of screen (0)
             }
           b/=d; c/=d; d=1; // normalize knots so that d==1 
@@ -138,7 +154,7 @@ void draw()      // executed at each frame (30 times per second)
             showNevilleConstruction(a,A,b,B,c,C,d,D,time);
           else
             {
-            strokeWeight(6); noFill(); stroke(blue); // draw fat curve without filling its interior
+            strokeWeight(6); noFill(); stroke(lineColor); // draw fat curve without filling its interior
             drawNevilleCurve(a,A,b,B,c,C,d,D);
             }
           // Draws intermediate positions 
